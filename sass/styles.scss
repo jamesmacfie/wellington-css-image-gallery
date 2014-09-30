@@ -1,0 +1,117 @@
+/* Third party */
+@import '../bower_components/font-awesome/scss/font-awesome';
+
+/* Variables */
+$bg: #323440;
+$selectorWidth: 50px;
+$activeSelectorBg: #e25936;
+$prevIcon: "\f053";
+$nextIcon: "\f054";
+
+/* Base */
+html {
+    background-color: $bg;
+}
+body {
+  font-family: 'Open Sans';
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Holder */
+.galleryHolder {
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.3);
+    height: 300px;
+    margin: 70px auto 0;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 450px;
+}
+
+/* Selectors */
+.imageSelector {
+    background-color: $bg;
+    border-right: 1px solid lighten($bg, 20%);
+    bottom: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    height: $selectorWidth;
+    opacity: 0.8;
+    padding-top: 15px;
+    position: absolute;
+    text-align: center;
+    width: $selectorWidth;
+    z-index: 2;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @for $i from 1 through 9 {
+        &:nth-child(#{$i}) {
+            left: $selectorWidth * $i - $selectorWidth + 10px;
+        }
+    }
+}
+
+
+/* Gallery Images */
+
+.imageHolder {
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    transition: 0.5s;
+}
+
+.imagePrev, .imageNext {
+    background-color: $bg;
+    display: block;
+    top: 110px;
+    height: 30px;
+    opacity: 0.8;
+    position: absolute;
+    width: 30px;
+    z-index: 2;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    &:before {
+        color: #fff;
+        display: block;
+        font-family: 'FontAwesome';
+        padding: 7px;
+    }
+}
+
+.imagePrev {
+    border-radius: 0 50% 50% 0;
+    &:before {
+        content: $prevIcon;
+    }
+}
+
+.imageNext {
+    border-radius: 50% 0 0 50%;
+    right: 0;
+
+    &:before {
+        content: $nextIcon;
+        padding-left: 12px;
+    }
+}
+
+/* Active images */
+.imageHolder:target {
+    opacity: 1;
+}
